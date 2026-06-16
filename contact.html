@@ -1,23 +1,115 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><link rel="icon" href="favicon.svg" type="image/svg+xml"/><link rel="stylesheet" href="styles.css"/><title>Contact — STUDIO</title></head><body>
-<nav class="nav"><div class="nav-inner"><div class="brand"><span class="logo-mark"></span><a href="index.html"><b>STUDIO</b></a></div><div class="nav-links"><a href="jeux.html" >JEUX</a><a href="studio.html" >STUDIO</a><a href="actualites.html" >DEVLOG</a><a href="presse.html" >PRESSE</a></div><a class="nav-cta" href="contact.html">CONTACT</a></div></nav>
-<header class="page-hero"><div class="glow" aria-hidden="true"></div>
-<p class="eyebrow">// ping()</p>
-<h1>On <span class="grad-text">vous lit</span>.</h1>
-<p class="sub">Une question, une candidature, une collab ? Écrivez-nous.</p></header>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+        <link rel="stylesheet" href="styles.css"/>
+        <title>Contact — STUDIO</title>
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="nav-inner">
+                <div class="brand">
+                    <span class="logo-mark"></span>
+                    <a href="index.html"><b>STUDIO</b></a>
+                </div>
+                <div class="nav-links">
+                    <a href="jeux.html">JEUX</a>
+                    <a href="studio.html">STUDIO</a>
+                    <a href="actualites.html">DEVLOG</a>
+                    <a href="presse.html">PRESSE</a>
+                </div>
+                <a class="nav-cta" href="contact.html">CONTACT</a>
+            </div>
+        </nav>
+        <header class="page-hero">
+            <div class="glow" aria-hidden="true"></div>
+            <p class="eyebrow">// ping()</p>
+            <h1>On <span class="grad-text">vous lit</span>.</h1>
+            <p class="sub">Une question, une candidature, une collab ? Écrivez-nous.</p>
+        </header>
 
-<section class="section" style="padding-top:20px"><div class="wrap contact-grid">
-<form class="reveal" action="https://formspree.io/f/XXXXXXX" method="POST">
-<div class="field"><label for="name">// nom</label><input id="name" name="name" type="text" placeholder="Jean Dupont" required/></div>
-<div class="field"><label for="email">// email</label><input id="email" name="email" type="email" placeholder="jean@exemple.com" required/></div>
-<div class="field"><label for="subject">// sujet</label>
-<select id="subject" name="subject"><option>Question générale</option><option>Presse</option><option>Candidature</option><option>Partenariat</option><option>Bug report</option></select></div>
-<div class="field"><label for="msg">// message</label><textarea id="msg" name="message" placeholder="Votre message..." required></textarea></div>
-<button class="btn-primary" type="submit" style="border:none;cursor:pointer;width:100%;text-align:center">ENVOYER</button>
-<p class="note">Le formulaire utilise Formspree. Remplace l'endpoint XXXXXXX par le tien.</p>
-</form>
-<div class="reveal">
-<p class="contact-big">Ou directement :<br/><a href="mailto:hello@studio.com">hello@studio.com</a></p>
-<div class="social-list" style="margin-top:28px"><a href="#">Discord</a><a href="#">X / Twitter</a><a href="#">Steam</a><a href="#">itch.io</a><a href="#">YouTube</a></div>
-<p class="note" style="margin-top:24px">Presse : <a href="mailto:press@studio.com" style="color:var(--g2)">press@studio.com</a><br/>Recrutement : <a href="mailto:jobs@studio.com" style="color:var(--g2)">jobs@studio.com</a></p>
-</div></div></section>
-<footer class="footer"><div class="footer-inner"><div><div class="brand"><span class="logo-mark"></span><b>STUDIO</b></div><p class="blurb">Studio de jeux indépendant.</p></div><div class="footer-cols"><div class="footer-col"><h5>// STUDIO</h5><a href="jeux.html">Jeux</a><a href="studio.html">Le studio</a><a href="actualites.html">Devlog</a></div><div class="footer-col"><h5>// SUIVRE</h5><a href="#">Steam</a><a href="#">itch.io</a><a href="#">Discord</a><a href="#">X</a></div><div class="footer-col"><h5>// CONTACT</h5><a href="presse.html">Presse</a><a href="contact.html">Jobs</a><a href="mailto:hello@studio.com">hello@studio.com</a></div></div></div><div class="copyright">© <span id="year">2026</span> STUDIO — tous droits réservés.</div></footer><script src="app.js"></script></body></html>
+        <section class="section" style="padding-top:20px">
+            <div class="wrap contact-grid">
+                    <form class="reveal" action="https://formspree.io/f/XXXXXXX" method="POST">
+                        <div class="field">
+                            <label for="name">// nom</label>
+                            <input id="name" name="name" type="text" placeholder="Jean Dupont" required/>
+                        </div>
+                        <div class="field">
+                            <label for="email">// email</label>
+                            <input id="email" name="email" type="email" placeholder="jean@exemple.com" required/>
+                        </div>
+                        <div class="field">
+                            <label for="subject">// sujet</label>
+                            <select id="subject" name="subject">
+                                <option>Question générale</option>
+                                <option>Presse</option>
+                                <option>Candidature</option>
+                                <option>Partenariat</option>
+                                <option>Bug report</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="msg">// message</label>
+                            <textarea id="msg" name="message" placeholder="Votre message..." required></textarea>
+                        </div>
+                        <button class="btn-primary" type="submit" style="border:none;cursor:pointer;width:100%;text-align:center">ENVOYER</button>
+                        <p class="note">Le formulaire utilise Formspree. Remplace l'endpoint XXXXXXX par le tien.</p>
+                    </form>
+                    <div class="reveal">
+                    <p class="contact-big">Ou directement :<br/>
+                        <a href="mailto:hello@studio.com">hello@studio.com</a>
+                    </p>
+                    <div class="social-list" style="margin-top:28px">
+                        <a href="#">Discord</a>
+                        <a href="#">X / Twitter</a>
+                        <a href="#">Steam</a>
+                        <a href="#">itch.io</a>
+                        <a href="#">YouTube</a>
+                    </div>
+                    <p class="note" style="margin-top:24px">Presse : 
+                        <a href="mailto:press@studio.com" style="color:var(--g2)">press@studio.com</a>
+                        <br/>Recrutement : 
+                        <a href="mailto:jobs@studio.com" style="color:var(--g2)">jobs@studio.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+<footer class="footer">
+    <div class="footer-inner">
+        <div>
+            <div class="brand">
+                <span class="logo-mark"></span>
+                <b>STUDIO</b>
+            </div>
+            <p class="blurb">Studio de jeux indépendant.</p>
+        </div>
+        <div class="footer-cols">
+            <div class="footer-col">
+                <h5>// STUDIO</h5>
+                <a href="jeux.html">Jeux</a>
+                <a href="studio.html">Le studio</a>
+                <a href="actualites.html">Devlog</a>
+            </div>
+            <div class="footer-col">
+                <h5>// SUIVRE</h5>
+                <a href="#">Steam</a>
+                <a href="#">itch.io</a>
+                <a href="#">Discord</a>
+                <a href="#">X</a>
+            </div>
+            <div class="footer-col">
+                <h5>// CONTACT</h5>
+                <a href="presse.html">Presse</a>
+                <a href="contact.html">Jobs</a>
+                <a href="mailto:hello@studio.com">hello@studio.com</a>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">© <span id="year">2026</span> STUDIO — tous droits réservés.</div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
