@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — STUDIO</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <a href="index.html" class="brand-name">STUDIO</a>
+    </div>
+    <div class="nav-links">
+      <a href="jeux.html">Jeux</a>
+      <a href="studio.html">Studio</a>
+      <a href="actualites.html">Actualités</a>
+      <a href="presse.html">Presse</a>
+    </div>
+    <a class="nav-cta" href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="glow" aria-hidden="true"></div>
+  <p class="eyebrow">Contact</p>
+  <h1>On vous lit.</h1>
+  <p class="sub">Une question, une candidature, une collab ? Écrivez-nous.</p>
+</header>
+
+<section class="section" style="padding-top:20px">
+  <div class="wrap contact-grid">
+    <!-- Formulaire : GitHub Pages est statique, donc on passe par un service
+         d'envoi (ex. Formspree). Remplace l'action par ton endpoint. -->
+    <form class="reveal" action="https://formspree.io/f/XXXXXXX" method="POST">
+      <div class="field">
+        <label for="name">Nom</label>
+        <input id="name" name="name" type="text" required />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+      <div class="field">
+        <label for="msg">Message</label>
+        <textarea id="msg" name="message" required></textarea>
+      </div>
+      <button class="btn-primary" type="submit" style="border:none;cursor:pointer">Envoyer</button>
+      <p class="note">Le formulaire utilise un service tiers (Formspree). Remplace l'endpoint <span class="mono">XXXXXXX</span> par le tien, ou supprime le formulaire et garde l'email ci-contre.</p>
+    </form>
+
+    <div class="reveal">
+      <p class="contact-big">Ou directement :<br /><a href="mailto:hello@studio.com">hello@studio.com</a></p>
+      <div class="social-list" style="margin-top:30px">
+        <a href="#">Discord</a>
+        <a href="#">X / Twitter</a>
+        <a href="#">Steam</a>
+        <a href="#">itch.io</a>
+        <a href="#">YouTube</a>
+      </div>
+      <p class="note" style="margin-top:24px">Presse : <a href="mailto:press@studio.com" style="color:var(--accent)">press@studio.com</a><br />Recrutement : <a href="mailto:jobs@studio.com" style="color:var(--accent)">jobs@studio.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="brand" style="margin-bottom:4px">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="brand-name">STUDIO</span>
+      </div>
+      <p class="blurb">Studio de jeux indépendant. On crée des mondes qu'on n'a pas envie de quitter.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><h5>Studio</h5>
+        <a href="jeux.html">Jeux</a><a href="studio.html">Le studio</a><a href="actualites.html">Actualités</a></div>
+      <div class="footer-col"><h5>Suivre</h5>
+        <a href="#">Steam</a><a href="#">itch.io</a><a href="#">Discord</a><a href="#">X / Twitter</a></div>
+      <div class="footer-col"><h5>Contact</h5>
+        <a href="presse.html">Presse</a><a href="contact.html">Recrutement</a><a href="mailto:hello@studio.com">hello@studio.com</a></div>
+    </div>
+  </div>
+  <div class="copyright">© <span id="year">2026</span> STUDIO. Tous droits réservés.</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
