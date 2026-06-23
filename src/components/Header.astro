@@ -1,0 +1,21 @@
+---
+// MODIFIER : Logo, nom du studio, liens
+const { page = '' } = Astro.props;
+---
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <!-- MODIFIER : Logo — remplace le span par <img src="/logo.svg" class="logo-mark" alt="Logo"> -->
+      <span class="logo-mark"></span>
+      <!-- MODIFIER : Nom du studio -->
+      <a href="/"><b>STUDIO</b></a>
+    </div>
+    <div class="nav-links">
+      <a href="/jeux" class={page === 'jeux' || page === 'jeu' ? 'active' : ''}>JEUX</a>
+      <a href="/studio" class={page === 'studio' || page === 'fondateurs' ? 'active' : ''}>STUDIO</a>
+      <a href="/actualites" class={page === 'actualites' || page === 'article' ? 'active' : ''}>DEVLOG</a>
+      <a href="/presse" class={page === 'presse' ? 'active' : ''}>PRESSE</a>
+    </div>
+    <a class="nav-cta" href="/contact">CONTACT</a>
+  </div>
+</nav>

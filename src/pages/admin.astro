@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Admin — STUDIO" page="admin">
+  <section class="section" style="padding-top:100px">
+    <div id="login-view" style="max-width:380px;margin:0 auto;padding:60px 0">
+      <p class="label">// admin.auth()</p>
+      <h2 style="font-family:var(--display);font-size:28px;font-weight:700;margin-bottom:8px">Espace admin</h2>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Connecte-toi pour gérer le devlog.</p>
+      <div class="field"><label for="pwd">// mot de passe</label><input id="pwd" type="password" placeholder="••••••••" autocomplete="off" /></div>
+      <button class="btn-primary" style="border:none;cursor:pointer;width:100%;text-align:center;margin-top:14px" id="login-btn">SE CONNECTER</button>
+      <p id="login-err" style="color:var(--g1);font-family:var(--mono);font-size:12px;margin-top:10px;display:none">// accès refusé</p>
+    </div>
+    <div id="dashboard" style="max-width:780px;margin:0 auto;display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:14px">
+        <h2 style="font-family:var(--display);font-size:24px;font-weight:700">// devlog</h2>
+        <div style="display:flex;gap:10px">
+          <button class="btn-primary" style="border:none;cursor:pointer;font-size:12px;padding:8px 16px" id="new-btn">+ Nouveau devlog</button>
+          <button style="font-family:var(--mono);font-size:12px;padding:8px 16px;border-radius:8px;border:1px solid rgba(255,46,126,.3);background:transparent;color:var(--g1);cursor:pointer" id="logout-btn">Déconnexion</button>
+        </div>
+      </div>
+      <div id="editor" style="display:none;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:28px;margin-bottom:28px">
+        <div class="field"><label>🎮 Nom du projet</label><input id="ed-project" type="text" placeholder="Mon Super Jeu" /></div>
+        <div class="field"><label>✅ Nouvelles fonctionnalités</label><textarea id="ed-done" placeholder="Une par ligne"></textarea></div>
+        <div class="field"><label>➡️ À venir</label><textarea id="ed-next" placeholder="Une par ligne"></textarea></div>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <button class="btn-primary" style="border:none;cursor:pointer" id="save-btn">Publier</button>
+          <button class="btn-ghost" style="cursor:pointer;border:1px solid var(--line);background:transparent" id="cancel-btn">Annuler</button>
+        </div>
+        <input type="hidden" id="ed-id" />
+      </div>
+      <div id="admin-posts"></div>
+    </div>
+  </section>
+  <script src="/admin.js"></script>
+  <script is:inline>
+    (function(){
+      var $=function(id){return document.getElementById(id)};
+      function route(){if(isLoggedIn()){$('login-view').style.display='none';$('dashboard').style.display='block';rl();}else{$('login-view').style.display='block';$('dashboard').style.display='none';}}
+      $('login-btn').onclick=async function(){if(await tryLogin($('pwd').value))route();else{$('login-err').style.display='block';$('pwd').value='';}};
+      $('pwd').onkeydown=function(e){if(e.key==='Enter')$('login-btn').click();};
+      $('logout-btn').onclick=logout;
+      $('new-btn').onclick=function(){$('ed-id').value='';$('ed-project').value='';$('ed-done').value='';$('ed-next').value='';$('editor').style.display='block';};
+      $('cancel-btn').onclick=function(){$('editor').style.display='none';};
+      $('save-btn').onclick=function(){var d={project:$('ed-project').value.trim(),done:$('ed-done').value.trim(),next:$('ed-next').value.trim()};if(!d.project)return;var id=$('ed-id').value;if(id)updatePost(id,d);else addPost(d);$('editor').style.display='none';rl();};
+      function rl(){var posts=getPosts(),el=$('admin-posts');if(!posts.length){el.innerHTML='<p style="text-align:center;color:var(--muted);font-family:var(--mono);padding:50px 0">// aucun devlog</p>';return;}el.innerHTML=posts.map(function(p){var d=new Date(p.created).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});return '<div style="display:flex;justify-content:space-between;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--surface);margin-bottom:12px"><div><strong>'+esc(p.project||'')+'</strong><br><small style="color:var(--muted)">'+d+'</small></div><div style="display:flex;gap:8px"><a href="/article?id='+p.id+'" target="_blank" class="btn-ghost" style="padding:6px 12px;font-size:12px">Voir</a><button onclick="delP(\''+p.id+'\')" style="font-family:var(--mono);font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid rgba(255,46,126,.3);background:transparent;color:var(--g1);cursor:pointer">Suppr.</button></div></div>';}).join('');}
+      window.delP=function(id){if(confirm('Supprimer ?')){deletePost(id);rl();}};
+      route();
+    })();
+  </script>
+</Layout>
