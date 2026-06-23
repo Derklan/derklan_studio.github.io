@@ -3,30 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Devlog — DERKLAN-STUDIO</title>
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Devlog — STUDIO</title>
 </head>
-<body data-page="actualites">
-  <div id="header"></div>
+<body>
 
+  <!-- ======================== NAVIGATION ======================== -->
+  <div id="header"></div>
+  <!-- ======================== HERO ======================== -->
   <header class="page-hero">
-    <p class="eyebrow">// devlog</p>
-    <h1>Nos <span class="grad-text">actualités</span></h1>
-    <p class="sub">Suivez l'évolution de nos projets.</p>
+    <div class="glow" aria-hidden="true"></div>
+    <p class="eyebrow">// console.log()</p>
+    <!-- MODIFIER : Titre du devlog -->
+    <h1>Les <span class="grad-text">coulisses</span>.</h1>
+    <!-- MODIFIER : Sous-titre -->
+    <p class="sub">Mises à jour, notes de production et coups de gueule occasionnels.</p>
   </header>
 
-  <section class="section">
+  <!-- ======================== LISTE DES ARTICLES (rendu dynamique par admin.js) ======================== -->
+  <!-- Les articles sont chargés depuis localStorage via admin.js -->
+  <!-- Pour poster un article : va sur admin.html, connecte-toi, et clique "+ Nouvel article" -->
+  <section class="section" style="padding-top:20px">
     <div class="wrap">
-      <div class="grid">
-        <a class="card reveal" href="./article.html"><div class="art"></div><div class="body"><p class="gen">DEVLOG</p><h4>Article 1</h4><p class="desc">Dernière mise à jour du projet...</p></div></a>
-        <a class="card reveal" href="./article.html"><div class="art"></div><div class="body"><p class="gen">DEVLOG</p><h4>Article 2</h4><p class="desc">Nouvelles mécaniques implémentées...</p></div></a>
-        <a class="card reveal" href="./article.html"><div class="art"></div><div class="body"><p class="gen">DEVLOG</p><h4>Article 3</h4><p class="desc">Retours de la communauté...</p></div></a>
+      <div class="post-list" id="devlog-posts">
+        <p style="text-align:center;color:var(--muted);font-family:var(--mono);padding:60px 0">// chargement...</p>
+      </div>
+
+      <!-- Lien admin discret en bas de page -->
+      <div style="text-align:center;margin-top:48px">
+        <a class="btn-link" href="admin.html" style="font-size:12px;color:var(--muted)">// admin</a>
       </div>
     </div>
   </section>
 
+  <!-- ======================== FOOTER ======================== -->
   <div id="footer"></div>
 
-  <script src="./assets/js/components.js"></script>
+  <!-- admin.js DOIT être chargé AVANT app.js (il rend les posts) -->
+  <script src="components.js"></script>
+  <script src="admin.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

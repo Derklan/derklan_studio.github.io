@@ -3,23 +3,251 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — DERKLAN-STUDIO</title>
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Contact — STUDIO</title>
+  <style>
+    /* ---- Formulaire IDE Darcula ---- */
+    .ide-form {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--code-bg);
+      box-shadow: 0 40px 120px -40px rgba(0,0,0,.8);
+    }
+    .ide-form .ide-bar {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 16px; background: #16171a; border-bottom: 1px solid #000;
+    }
+    .ide-form .dots { display: flex; gap: 7px; }
+    .ide-form .dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .ide-form .dots i:nth-child(1) { background: #ff5f57; }
+    .ide-form .dots i:nth-child(2) { background: #febc2e; }
+    .ide-form .dots i:nth-child(3) { background: #28c840; }
+    .ide-form .ide-tab {
+      font-family: var(--mono); font-size: 12px; color: #c2c2cb;
+      background: #1e1f22; padding: 5px 12px; border-radius: 6px;
+    }
+    .ide-form .ide-tab b { color: var(--g2); font-weight: 400; }
+
+    .ide-form .form-body {
+      display: flex; font-family: var(--mono); font-size: 13.5px; line-height: 1.85;
+    }
+    .ide-form .gutter {
+      padding: 20px 0 20px 18px; color: #4b4d52; text-align: right; user-select: none;
+      flex-shrink: 0;
+    }
+    .ide-form .gutter span { display: block; padding-right: 14px; height: 46px; display: flex; align-items: center; justify-content: flex-end; }
+    .ide-form .gutter span.tall { height: 160px; }
+    .ide-form .gutter span.btn-line { height: 62px; }
+
+    .ide-form .code-area {
+      flex: 1; padding: 20px 22px 28px 0; overflow-x: auto;
+    }
+
+    /* Ligne de code = un champ du formulaire */
+    .code-line {
+      display: flex; align-items: center; gap: 0; min-height: 46px; flex-wrap: wrap;
+    }
+    .code-line.tall { min-height: 160px; align-items: flex-start; padding-top: 4px; }
+
+    /* Tokens de syntaxe */
+    .t-cmt  { color: var(--cmt); }
+    .t-kw   { color: var(--kw); }
+    .t-prop { color: var(--prop); }
+    .t-str  { color: var(--str); }
+    .t-fn   { color: var(--fn); }
+    .t-punct{ color: var(--code-txt); }
+
+    /* Champs input stylés comme des string values */
+    .ide-form input, .ide-form textarea, .ide-form select {
+      background: transparent; border: none; outline: none;
+      font-family: var(--mono); font-size: 13.5px; line-height: 1.85;
+      color: var(--str); caret-color: var(--g2); padding: 0; margin: 0;
+    }
+    .ide-form input { width: 280px; }
+    .ide-form input::placeholder, .ide-form textarea::placeholder { color: #4a5a40; }
+    .ide-form textarea {
+      width: 100%; min-height: 130px; resize: vertical;
+      scrollbar-width: thin; scrollbar-color: #3a3a44 transparent;
+    }
+    .ide-form select {
+      color: var(--str); cursor: pointer;
+      -webkit-appearance: none; appearance: none;
+    }
+    .ide-form select option { background: var(--code-bg); color: var(--str); }
+
+    /* Focus : surlignage de la ligne (comme un IDE) */
+    .code-line:focus-within { background: rgba(255,255,255,.03); margin: 0 -22px 0 -18px; padding: 0 22px 0 18px; border-radius: 0; }
+
+    /* Bouton submit stylé comme un appel de fonction */
+    .ide-submit {
+      display: inline-flex; align-items: center; gap: 0;
+      background: transparent; border: 1px solid rgba(86,168,245,.3);
+      border-radius: 8px; padding: 10px 20px; cursor: pointer;
+      font-family: var(--mono); font-size: 13.5px; transition: background .25s, border-color .25s;
+    }
+    .ide-submit:hover { background: rgba(86,168,245,.08); border-color: rgba(86,168,245,.6); }
+    .ide-submit .t-fn { pointer-events: none; }
+    .ide-submit .t-str { pointer-events: none; }
+    .ide-submit .t-punct { pointer-events: none; }
+
+    /* Curseur clignotant après le dernier champ */
+    .cursor {
+      display: inline-block; width: 2px; height: 18px; background: var(--g2);
+      animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Responsive */
+    @media(max-width:560px) {
+      .ide-form .form-body { font-size: 12px; }
+      .ide-form .gutter { padding-left: 12px; }
+      .ide-form input { width: 180px; }
+      .contact-grid { gap: 28px; }
+    }
+  </style>
 </head>
-<body data-page="contact">
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
   <div id="header"></div>
+
+  <!-- ======================== HERO ======================== -->
   <header class="page-hero">
-    <p class="eyebrow">// get in touch</p>
-    <h1>Nous <span class="grad-text">contacter</span></h1>
-    <p class="sub">Vous avez une question ou une opportunité ?</p>
+    <div class="glow" aria-hidden="true"></div>
+    <p class="eyebrow">// ping()</p>
+    <h1>On <span class="grad-text">vous lit</span>.</h1>
+    <p class="sub">Une question, une candidature, une collab ? Écrivez-nous.</p>
   </header>
-  <section class="section">
-    <div class="wrap">
-      <div class="head center reveal"><h2>Contactez-nous</h2></div>
-      <p class="reveal">Email: hello@derklan-studio.com</p>
+
+  <!-- ======================== FORMULAIRE IDE + CONTACT ======================== -->
+  <section class="section" style="padding-top:20px">
+    <div class="wrap contact-grid">
+
+      <!-- ============ FORMULAIRE EN MODE IDE DARCULA ============ -->
+      <!-- MODIFIER : Remplace l'URL Formspree (action) par ton endpoint -->
+      <div class="ide-form reveal">
+        <div class="ide-bar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span class="ide-tab"><b>contact</b>.send.ts</span>
+        </div>
+        <form action="https://formspree.io/f/XXXXXXX" method="POST">
+          <div class="form-body">
+            <div class="gutter">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span class="tall">6</span>
+              <span>7</span>
+              <span class="btn-line">8</span>
+            </div>
+            <div class="code-area">
+
+              <!-- Ligne 1 : commentaire -->
+              <div class="code-line">
+                <span class="t-cmt">// envoyez-nous un message</span>
+              </div>
+
+              <!-- Ligne 2 : const message = { -->
+              <div class="code-line">
+                <span class="t-kw">const&nbsp;</span>
+                <span class="t-prop">message</span>
+                <span class="t-punct">&nbsp;=&nbsp;{</span>
+              </div>
+
+              <!-- Ligne 3 : nom -->
+              <div class="code-line">
+                <span class="t-punct">&nbsp;&nbsp;</span>
+                <span class="t-prop">name</span>
+                <span class="t-punct">:&nbsp;"</span>
+                <!-- MODIFIER : Placeholder du nom -->
+                <input type="text" name="name" placeholder="Jean Dupont" required />
+                <span class="t-punct">",</span>
+              </div>
+
+              <!-- Ligne 4 : email -->
+              <div class="code-line">
+                <span class="t-punct">&nbsp;&nbsp;</span>
+                <span class="t-prop">email</span>
+                <span class="t-punct">:&nbsp;"</span>
+                <!-- MODIFIER : Placeholder de l'email -->
+                <input type="email" name="email" placeholder="jean@exemple.com" required />
+                <span class="t-punct">",</span>
+              </div>
+
+              <!-- Ligne 5 : sujet (select) -->
+              <div class="code-line">
+                <span class="t-punct">&nbsp;&nbsp;</span>
+                <span class="t-prop">subject</span>
+                <span class="t-punct">:&nbsp;"</span>
+                <!-- MODIFIER : Options du sélecteur de sujet -->
+                <select name="subject">
+                  <option>Question générale</option>
+                  <option>Presse</option>
+                  <option>Candidature</option>
+                  <option>Partenariat</option>
+                  <option>Bug report</option>
+                </select>
+                <span class="t-punct">",</span>
+              </div>
+
+              <!-- Ligne 6 : message (textarea) -->
+              <div class="code-line tall">
+                <span class="t-punct">&nbsp;&nbsp;</span>
+                <span class="t-prop">body</span>
+                <span class="t-punct">:&nbsp;`</span>
+                <textarea name="message" placeholder="Votre message ici..." required></textarea>
+                <span class="t-punct">`,</span>
+              </div>
+
+              <!-- Ligne 7 : fermeture -->
+              <div class="code-line">
+                <span class="t-punct">}</span>
+                <span class="cursor"></span>
+              </div>
+
+              <!-- Ligne 8 : bouton submit comme appel de fonction -->
+              <div class="code-line" style="margin-top:8px">
+                <button type="submit" class="ide-submit">
+                  <span class="t-fn">send</span><span class="t-punct">(</span><span class="t-str">message</span><span class="t-punct">)</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- ============ COLONNE DROITE : EMAIL DIRECT + RÉSEAUX ============ -->
+      <div class="reveal">
+        <!-- MODIFIER : Email principal -->
+        <p class="contact-big">Ou directement :<br/><a href="mailto:hello@studio.com">hello@studio.com</a></p>
+
+        <!-- MODIFIER : Liens réseaux sociaux -->
+        <div class="social-list" style="margin-top:28px">
+          <a href="#">Discord</a>
+          <a href="#">X / Twitter</a>
+          <a href="#">Steam</a>
+          <a href="#">itch.io</a>
+          <a href="#">YouTube</a>
+        </div>
+
+        <!-- MODIFIER : Emails spécifiques -->
+        <p class="note" style="margin-top:24px">
+          Presse : <a href="mailto:press@studio.com" style="color:var(--g2)">press@studio.com</a><br/>
+          Recrutement : <a href="mailto:jobs@studio.com" style="color:var(--g2)">jobs@studio.com</a>
+        </p>
+      </div>
+
     </div>
   </section>
+
+  <!-- ======================== FOOTER ======================== -->
   <div id="footer"></div>
-  <script src="./assets/js/components.js"></script>
+ <script src="components.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

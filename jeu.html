@@ -3,30 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Détail du Jeu — DERKLAN-STUDIO</title>
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- MODIFIER : Titre — remplace "Project One" par le nom du jeu -->
+  <title>Project One — STUDIO</title>
 </head>
-<body data-page="jeu">
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
   <div id="header"></div>
 
-  <header class="page-hero">
-    <p class="eyebrow">// project detail</p>
-    <h1>Project <span class="grad-text">One</span></h1>
-    <p class="sub">Une expérience de jeu unique et immersive.</p>
-  </header>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="head reveal">
-        <h2>À propos du jeu</h2>
-        <p>Description détaillée du projet, des mécaniques, de l'univers.</p>
+  <!-- ======================== HERO JEU (style Rockstar key art) ======================== -->
+  <!-- DUPLIQUER : cette page pour chaque jeu (jeu-nomjeu.html) -->
+  <section class="section" style="padding-top:96px">
+    <div class="wrap reveal">
+      <div class="game-hero">
+        <!-- MODIFIER : Visuel du jeu — remplace art-bg par style="background-image:url(img/jeu-hero.jpg);background-size:cover" -->
+        <div class="art-bg"></div>
+        <div class="inner">
+          <!-- MODIFIER : Genre du jeu -->
+          <p class="kick mono">// action · aventure</p>
+          <!-- MODIFIER : Nom du jeu -->
+          <h1>Project One</h1>
+          <!-- MODIFIER : Pitch du jeu -->
+          <p class="tag">Le pitch en une phrase, celle qui reste après le trailer.</p>
+          <div class="store-btns">
+            <!-- MODIFIER : Lien Steam / store -->
+            <a class="btn-primary" href="#">WISHLIST STEAM</a>
+            <!-- MODIFIER : Lien bande-annonce (YouTube, etc.) -->
+            <a class="btn-ghost" href="#">// bande-annonce</a>
+          </div>
+        </div>
       </div>
-      <p class="reveal">Contenu du jeu à remplir...</p>
     </div>
   </section>
 
-  <div id="footer"></div>
+  <!-- ======================== GALERIE SCREENSHOTS ======================== -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="gallery">
+        <!-- MODIFIER : Remplace chaque .shot par style="background-image:url(img/screen1.jpg);background-size:cover" -->
+        <div class="shot sh1"></div>
+        <div class="shot sh2"></div>
+        <div class="shot sh3"></div>
+        <div class="shot sh4"></div>
+        <div class="shot sh5"></div>
+        <div class="shot sh1"></div>
+        <!-- AJOUTER / SUPPRIMER : des <div class="shot"> selon le nombre de captures -->
+      </div>
+    </div>
+  </section>
 
-  <script src="./assets/js/components.js"></script>
+  <!-- ======================== DESCRIPTION + FICHE TECHNIQUE ======================== -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap split">
+
+      <!-- Colonne gauche : description -->
+      <div class="prose reveal">
+        <!-- MODIFIER : Paragraphes de description du jeu -->
+        <p>Deux ou trois paragraphes sur le jeu. Ce qu'on y vit, l'ambiance, ce qui le rend différent.</p>
+        <p>Un second paragraphe pour la promesse : ce qu'il offre que personne d'autre ne fait pareil.</p>
+
+        <h3 style="font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 18px">
+          // features
+        </h3>
+        <ul class="feature-list">
+          <!-- MODIFIER : Liste des features du jeu -->
+          <li>Une mécanique signature.</li>
+          <li>Un second pilier de gameplay.</li>
+          <li>Ce qui donne envie d'y revenir.</li>
+          <li>Mode solo / multi / co-op.</li>
+          <!-- AJOUTER : des <li> pour plus de features -->
+        </ul>
+      </div>
+
+      <!-- Colonne droite : fiche technique -->
+      <aside class="spec reveal">
+        <h3>// fiche technique</h3>
+        <!-- MODIFIER : Chaque ligne de la fiche -->
+        <div class="spec-row"><span>Genre</span><span>Action · Aventure</span></div>
+        <div class="spec-row"><span>Plateformes</span><span>PC · Quest · Console</span></div>
+        <div class="spec-row"><span>Sortie</span><span>2026</span></div>
+        <div class="spec-row"><span>Joueurs</span><span>1 — 4</span></div>
+        <div class="spec-row"><span>Langues</span><span>FR · EN</span></div>
+        <div class="spec-row"><span>Moteur</span><span>Unity</span></div>
+        <!-- AJOUTER : des <div class="spec-row"> pour d'autres infos -->
+        <div style="margin-top:20px">
+          <!-- MODIFIER : Lien wishlist -->
+          <a class="btn-primary" href="#" style="display:block;text-align:center">WISHLIST</a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <!-- MODIFIER : Même footer (logo, nom, liens, email) -->
+  <div id="footer"></div>
+  <script src="components.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
   // Charge le header
   const headerEl = document.getElementById('header');
   if (headerEl) {
-    fetch('./components/header.html')
+    fetch('./header.html')
       .then(r => {
         if (!r.ok) throw new Error('Header load failed: ' + r.status);
         return r.text();
@@ -31,7 +31,7 @@
   // Charge le footer
   const footerEl = document.getElementById('footer');
   if (footerEl) {
-    fetch('./components/footer.html')
+    fetch('./footer.html')
       .then(r => {
         if (!r.ok) throw new Error('Footer load failed: ' + r.status);
         return r.text();
