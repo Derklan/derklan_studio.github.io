@@ -1,83 +1,95 @@
----
-layout: default
-title: Jeux indépendants
-active: index
----
-<header class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <p class="eyebrow">// independent game studio — est. 2024</p>
-    <h1>Des mondes faits pour <span class="grad-text">durer</span>.</h1>
-    <p class="sub">On code, on dessine, on jette, on recommence. Jusqu'à ce que ça tienne debout.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="{{ site.baseurl }}/jeux">VOIR LES JEUX</a>
-      <a class="btn-ghost" href="{{ site.baseurl }}/studio">// le studio</a>
-    </div>
-  </div>
-</header>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DERKLAN-STUDIO — Studio de jeux indépendant</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body data-page="index">
+  <div id="header"></div>
 
-<section class="section">
-  <div class="wrap">
-    <p class="label reveal">// studio.config.ts</p>
-    <div class="head reveal">
-      <h2>On parle votre langage.</h2>
-      <p>Un studio tenu par des gens qui écrivent du code.</p>
-    </div>
-    <div class="ide reveal">
-      <div class="ide-bar">
-        <div class="dots"><i></i><i></i><i></i></div>
-        <span class="ide-tab"><b>studio</b>.config.ts</span>
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">// independent game studio — est. 2024</p>
+      <h1>Des mondes faits pour <span class="grad-text">durer</span>.</h1>
+      <p class="sub">On code, on dessine, on jette, on recommence. Jusqu'à ce que ça tienne debout.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="./jeux.html">VOIR LES JEUX</a>
+        <a class="btn-ghost" href="./studio.html">// le studio</a>
       </div>
-      <div class="ide-body">
-        <div class="gutter mono">
-          <span>1</span><span>2</span><span>3</span><span>4</span>
-          <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="label reveal">// studio.config.ts</p>
+      <div class="head reveal">
+        <h2>On parle votre langage.</h2>
+        <p>Un studio tenu par des gens qui écrivent du code.</p>
+      </div>
+      <div class="ide reveal">
+        <div class="ide-bar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span class="ide-tab"><b>studio</b>.config.ts</span>
         </div>
-        <div class="code-block">
-          <div class="ln"><span class="c-cmt">// ce qu'on est, sans le marketing</span></div>
-          <div class="ln"><span class="c-kw">export const</span> <span class="c-prop">STUDIO</span> = {</div>
-          <div class="ln">  <span class="c-prop">name</span>: <span class="c-str">"STUDIO"</span>,</div>
-          <div class="ln">  <span class="c-prop">since</span>: <span class="c-num">2024</span>,</div>
-          <div class="ln">  <span class="c-prop">team</span>: <span class="c-str">"petite, obsessionnelle"</span>,</div>
-          <div class="ln">  <span class="c-prop">motto</span>: <span class="c-str">"des mondes faits main"</span>,</div>
-          <div class="ln">  <span class="c-prop">ship</span>: () =&gt; <span class="c-fn">quality</span>(<span class="c-str">"avant tout"</span>),</div>
-          <div class="ln">  <span class="c-prop">compromise</span>: <span class="c-kw">null</span>,</div>
-          <div class="ln">}</div>
+        <div class="ide-body">
+          <div class="gutter mono">
+            <span>1</span><span>2</span><span>3</span><span>4</span>
+            <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+          </div>
+          <div class="code-block">
+            <div class="ln"><span class="c-cmt">// ce qu'on est, sans le marketing</span></div>
+            <div class="ln"><span class="c-kw">export const</span> <span class="c-prop">STUDIO</span> = {</div>
+            <div class="ln">  <span class="c-prop">name</span>: <span class="c-str">"DERKLAN-STUDIO"</span>,</div>
+            <div class="ln">  <span class="c-prop">since</span>: <span class="c-num">2024</span>,</div>
+            <div class="ln">  <span class="c-prop">team</span>: <span class="c-str">"petite, obsessionnelle"</span>,</div>
+            <div class="ln">  <span class="c-prop">motto</span>: <span class="c-str">"des mondes faits main"</span>,</div>
+            <div class="ln">  <span class="c-prop">ship</span>: () =&gt; <span class="c-fn">quality</span>(<span class="c-str">"avant tout"</span>),</div>
+            <div class="ln">  <span class="c-prop">compromise</span>: <span class="c-kw">null</span>,</div>
+            <div class="ln">}</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" style="padding-top:0">
-  <div class="wrap reveal">
-    <div class="feature">
-      <div class="art"><div class="art-bg"></div></div>
-      <div class="inner">
-        <p class="kick mono">// dernier projet — 2026</p>
-        <h3>Project One</h3>
-        <p>Le pitch en une phrase.</p>
-        <a class="btn-primary" href="{{ site.baseurl }}/jeu">DÉCOUVRIR</a>
+  <section class="section" style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="feature">
+        <div class="art"><div class="art-bg"></div></div>
+        <div class="inner">
+          <p class="kick mono">// dernier projet — 2026</p>
+          <h3>Project One</h3>
+          <p>Le pitch en une phrase.</p>
+          <a class="btn-primary" href="./jeu.html">DÉCOUVRIR</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="head center reveal"><p class="label">// catalog</p><h2>Nos jeux</h2></div>
-    <div class="grid">
-      <a class="card reveal" href="{{ site.baseurl }}/jeu"><div class="art a1"></div><div class="body"><p class="gen">ACTION</p><h4>Project Two</h4><p class="desc">Ce que le joueur ressent.</p></div></a>
-      <a class="card reveal" href="{{ site.baseurl }}/jeu"><div class="art a2"></div><div class="body"><p class="gen">AVENTURE</p><h4>Project Three</h4><p class="desc">Ce que le joueur ressent.</p></div></a>
-      <a class="card reveal" href="{{ site.baseurl }}/jeu"><div class="art a3"></div><div class="body"><p class="gen">ROGUELITE</p><h4>Project Four</h4><p class="desc">Ce que le joueur ressent.</p></div></a>
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="head center reveal"><p class="label">// catalog</p><h2>Nos jeux</h2></div>
+      <div class="grid">
+        <a class="card reveal" href="./jeu.html"><div class="art a1"></div><div class="body"><p class="gen">ACTION</p><h4>Project Two</h4><p class="desc">Ce que le joueur ressent.</p></div></a>
+        <a class="card reveal" href="./jeu.html"><div class="art a2"></div><div class="body"><p class="gen">AVENTURE</p><h4>Project Three</h4><p class="desc">Ce que le joueur ressent.</p></div></a>
+        <a class="card reveal" href="./jeu.html"><div class="art a3"></div><div class="body"><p class="gen">ROGUELITE</p><h4>Project Four</h4><p class="desc">Ce que le joueur ressent.</p></div></a>
+      </div>
+      <div style="text-align:center;margin-top:44px" class="reveal">
+        <a class="btn-ghost" href="./jeux.html">// tous les jeux</a>
+      </div>
     </div>
-    <div style="text-align:center;margin-top:44px" class="reveal">
-      <a class="btn-ghost" href="{{ site.baseurl }}/jeux">// tous les jeux</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="mono-block">
-  <h2 class="reveal">On ne sort pas des jeux.<br/><span class="grad-text">On livre des mondes.</span></h2>
-  <p class="reveal">Petit studio, grandes ambitions.</p>
-</section>
+  <section class="mono-block">
+    <h2 class="reveal">On ne sort pas des jeux.<br/><span class="grad-text">On livre des mondes.</span></h2>
+    <p class="reveal">Petit studio, grandes ambitions.</p>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="./assets/js/components.js"></script>
+</body>
+</html>

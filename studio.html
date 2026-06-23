@@ -1,40 +1,57 @@
----
-layout: default
-title: Studio
-active: studio
----
-<header class="page-hero">
-  <div class="glow"></div>
-  <p class="eyebrow">// about()</p>
-  <h1>Petit studio. <span class="grad-text">Grandes obsessions.</span></h1>
-  <p class="sub">Quelques personnes, une exigence commune.</p>
-</header>
-<section class="section">
-  <div class="wrap manifesto reveal">
-    <h2>On a commencé pour faire les jeux qui nous manquaient.</h2>
-    <p>Raconte ici l'origine du studio.</p>
-    <div style="margin-top:36px"><a class="btn-primary" href="{{ site.baseurl }}/fondateurs">RENCONTRER LES FONDATEURS</a></div>
-  </div>
-</section>
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="head center reveal"><p class="label">// team.members()</p><h2>L'équipe</h2></div>
-    <div class="team">
-      <div class="member reveal"><div class="avatar"></div><h4>Prénom Nom</h4><p>Game Director</p></div>
-      <div class="member reveal"><div class="avatar"></div><h4>Prénom Nom</h4><p>Lead Programmer</p></div>
-      <div class="member reveal"><div class="avatar"></div><h4>Prénom Nom</h4><p>Art Director</p></div>
-      <div class="member reveal"><div class="avatar"></div><h4>Prénom Nom</h4><p>Sound Design</p></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Studio — DERKLAN-STUDIO</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body data-page="studio">
+  <div id="header"></div>
+
+  <header class="page-hero">
+    <p class="eyebrow">// qui sommes-nous</p>
+    <h1>Un studio de <span class="grad-text">passionnés</span>.</h1>
+    <p class="sub">Créateurs de mondes numériques depuis 2024.</p>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2>Notre vision</h2>
+        <p>On crée des expériences de jeu qui marquent. Pas de compromis sur la qualité.</p>
+      </div>
+      <div class="grid">
+        <div class="card reveal">
+          <div class="art"></div>
+          <div class="body">
+            <p class="gen">VALEUR</p>
+            <h4>Qualité</h4>
+            <p class="desc">Chaque pixel compte. Chaque mécanique est pensée.</p>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="art"></div>
+          <div class="body">
+            <p class="gen">VALEUR</p>
+            <h4>Innovation</h4>
+            <p class="desc">On n'a pas peur de prendre des risques créatifs.</p>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="art"></div>
+          <div class="body">
+            <p class="gen">VALEUR</p>
+            <h4>Passion</h4>
+            <p class="desc">On aime ce qu'on fait. Ça se voit.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="head center reveal"><p class="label">// core.values()</p><h2>Ce qui compte</h2></div>
-    <div class="values">
-      <div class="value reveal"><p class="num mono">01</p><h3>Le détail d'abord</h3><p>Un jeu plus petit mais sans angle mort.</p></div>
-      <div class="value reveal"><p class="num mono">02</p><h3>Indépendance</h3><p>Non négociable.</p></div>
-      <div class="value reveal"><p class="num mono">03</p><h3>Joueur avant tout</h3><p>L'expérience prime.</p></div>
-    </div>
-  </div>
-</section>
-<section class="mono-block"><h2 class="reveal">On code.<br/>On crée.<br/><span class="grad-text">On recommence.</span></h2></section>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="./assets/js/components.js"></script>
+</body>
+</html>

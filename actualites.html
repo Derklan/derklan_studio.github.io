@@ -1,13 +1,32 @@
----
-layout: default
-title: Devlog
-active: actualites
-admin: true
----
-<header class="page-hero"><div class="glow"></div><p class="eyebrow">// console.log()</p>
-  <h1>Les <span class="grad-text">coulisses</span>.</h1>
-  <p class="sub">Mises à jour, notes de production.</p></header>
-<section class="section" style="padding-top:20px"><div class="wrap">
-  <div class="post-list" id="devlog-posts"><p style="text-align:center;color:var(--muted);font-family:var(--mono);padding:60px 0">// chargement...</p></div>
-  <div style="text-align:center;margin-top:48px"><a class="btn-link" href="{{ site.baseurl }}/admin" style="font-size:12px;color:var(--muted)">// admin</a></div>
-</div></section>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devlog — DERKLAN-STUDIO</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body data-page="actualites">
+  <div id="header"></div>
+
+  <header class="page-hero">
+    <p class="eyebrow">// devlog</p>
+    <h1>Nos <span class="grad-text">actualités</span></h1>
+    <p class="sub">Suivez l'évolution de nos projets.</p>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid">
+        <a class="card reveal" href="./article.html"><div class="art"></div><div class="body"><p class="gen">DEVLOG</p><h4>Article 1</h4><p class="desc">Dernière mise à jour du projet...</p></div></a>
+        <a class="card reveal" href="./article.html"><div class="art"></div><div class="body"><p class="gen">DEVLOG</p><h4>Article 2</h4><p class="desc">Nouvelles mécaniques implémentées...</p></div></a>
+        <a class="card reveal" href="./article.html"><div class="art"></div><div class="body"><p class="gen">DEVLOG</p><h4>Article 3</h4><p class="desc">Retours de la communauté...</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="./assets/js/components.js"></script>
+</body>
+</html>
