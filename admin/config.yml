@@ -1,0 +1,109 @@
+# ============================================================
+#  Sveltia CMS — config Derklan Studio
+#  Place ce fichier dans  /admin/config.yml  (a cote de index.html)
+# ============================================================
+
+backend:
+  name: github
+  repo: Derklan/Derklan-Studio.github.io   # ton repo
+  branch: main
+  # Auth par JETON : rien a ajouter ici.
+  # Sur l'ecran de connexion, clique "Sign in with Token".
+  # (Si plus tard tu passes au bouton "Login with GitHub" via
+  #  Cloudflare, tu ajouteras :  base_url: https://TON-worker.workers.dev )
+
+# Quand tu uploades une image depuis le CMS, elle ira dans ce dossier du repo :
+media_folder: "Ressources"
+public_folder: "/Ressources"
+
+# On stocke TOUT dans 2 fichiers (1 liste de jeux, 1 liste de devlogs).
+# C'est ce qui colle a ton getGames()/getPosts() actuel (qui renvoient un tableau).
+collections:
+  - name: catalogue
+    label: "Contenu du site"
+    files:
+
+      # ---------------------- JEUX ----------------------
+      - name: jeux
+        label: "Jeux"
+        file: "content/jeux.json"
+        format: json
+        fields:
+          - name: jeux
+            label: "Liste des jeux"
+            label_singular: "Jeu"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: id, label: "ID (laisser vide = auto)", widget: string, required: false }
+              - { name: created, label: "Date de creation", widget: datetime, required: false }
+              - { name: name, label: "Nom du jeu", widget: string }
+              - { name: genre, label: "Genre", widget: string, required: false }
+              # Valeurs alignees sur GAME_BADGE de games.js :
+              - name: badge
+                label: "Badge / statut"
+                widget: select
+                default: "dev"
+                options:
+                  - { label: "Disponible",       value: "available" }
+                  - { label: "Acces anticipe",   value: "early" }
+                  - { label: "Bientot",          value: "soon" }
+                  - { label: "Prototype",        value: "proto" }
+                  - { label: "En developpement", value: "dev" }
+                  - { label: "En pause",         value: "onhold" }
+              - { name: pitch, label: "Pitch (une ligne)", widget: string, required: false }
+              - { name: cover, label: "Image de couverture (URL)", widget: string, required: false }
+              - { name: featured, label: "Promouvoir sur l'accueil", widget: boolean, default: false }
+              - { name: steamUrl, label: "Lien Steam / wishlist", widget: string, required: false }
+              - { name: trailerUrl, label: "Lien bande-annonce", widget: string, required: false }
+              - { name: description, label: "Description (une ligne = un paragraphe)", widget: text, required: false }
+              - { name: features, label: "Features (une ligne = une puce)", widget: text, required: false }
+              - name: specs
+                label: "Fiche technique"
+                widget: list
+                required: false
+                summary: "{{fields.label}} : {{fields.value}}"
+                fields:
+                  - { name: label, label: "Label", widget: string }
+                  - { name: value, label: "Valeur", widget: string }
+              - name: media
+                label: "Medias (carousel)"
+                widget: list
+                required: false
+                summary: "{{fields.type}} — {{fields.url}}"
+                fields:
+                  - { name: type, label: "Type", widget: select, options: ["image", "video"], default: "image" }
+                  - { name: url, label: "URL", widget: string }
+                  - { name: desc, label: "Legende", widget: string, required: false }
+
+      # --------------------- DEVLOGS --------------------
+      - name: devlogs
+        label: "Devlogs"
+        file: "content/devlogs.json"
+        format: json
+        fields:
+          - name: devlogs
+            label: "Liste des devlogs"
+            label_singular: "Devlog"
+            widget: list
+            summary: "{{fields.project}}"
+            fields:
+              - { name: id, label: "ID (laisser vide = auto)", widget: string, required: false }
+              - { name: created, label: "Date de creation", widget: datetime, required: false }
+              - { name: project, label: "Nom du projet", widget: string }
+              # ⚠️ A CONFIRMER avec STATUS_MAP dans ton games.js :
+              - { name: status, label: "Statut", widget: select,
+                  options: ["alpha", "beta", "released"], default: "alpha" }
+              - { name: pitch, label: "Pitch", widget: string, required: false }
+              - { name: engine, label: "Moteur", widget: string, required: false }
+              - { name: version, label: "Version", widget: string, required: false }
+              - { name: done, label: "Nouvelles fonctionnalites (une ligne = une puce)", widget: text, required: false }
+              - { name: next, label: "A venir (une ligne = une puce)", widget: text, required: false }
+              - name: media
+                label: "Medias"
+                widget: list
+                required: false
+                summary: "{{fields.url}}"
+                fields:
+                  - { name: url, label: "URL image", widget: string }
+                  - { name: desc, label: "Legende", widget: string, required: false }

@@ -1,6 +1,7 @@
 // ============================================================
 //  STUDIO — Système Jeux (catalogue + fiche jeu)
-//  Parallèle à admin.js. Noms préfixés pour cohabiter sans conflit.
+//  Version CMS : lecture depuis content/jeux.json (rempli par Sveltia CMS)
+//  Seules la SOURCE des données et l'init ont changé. Le rendu est intact.
 // ============================================================
 
 // ---- Helpers ----
@@ -16,23 +17,49 @@ const GAME_BADGE = {
   onhold:    { label: 'En pause',         color: '#5a5a62' },
 };
 
-// ---- CRUD (localStorage) ----
-function getGames(){ try { return JSON.parse(localStorage.getItem('studio_games') || '[]'); } catch { return []; } }
-function saveGames(g){ localStorage.setItem('studio_games', JSON.stringify(g)); }
-function addGame(game){
-  const games = getGames();
-  game.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  game.created = new Date().toISOString();
-  games.unshift(game); saveGames(games); return game;
+// ============================================================
+//  LECTURE depuis content/jeux.json  (généré par le CMS)
+//  -> remplace l'ancien stockage localStorage
+// ============================================================
+let GAMES_CACHE = null;
+
+function _gSlug(s){
+  return (s || '').toString().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')   // enlève les accents
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'jeu';
 }
-function updateGame(id, data){
-  const games = getGames(); const i = games.findIndex(g => g.id === id);
-  if (i === -1) return null;
-  games[i] = { ...games[i], ...data, updated: new Date().toISOString() };
-  saveGames(games); return games[i];
+
+async function loadGames(){
+  if (GAMES_CACHE) return GAMES_CACHE;
+  try {
+    const res = await fetch('content/jeux.json', { cache: 'no-cache' });
+    const data = await res.json();
+    const list = Array.isArray(data) ? data : (data.jeux || []);
+    // id stable pour les jeux créés via le CMS qui n'en ont pas encore
+    const counts = {};
+    list.forEach(g => {
+      if (!g.id){
+        const base = _gSlug(g.name);
+        if (counts[base] === undefined){ counts[base] = 0; g.id = base; }
+        else { counts[base]++; g.id = base + '-' + counts[base]; }
+      }
+    });
+    // plus récent en premier (si une date est présente)
+    list.sort((a, b) => String(b.created || '').localeCompare(String(a.created || '')));
+    GAMES_CACHE = list;
+  } catch (e){
+    console.error('// chargement de content/jeux.json échoué', e);
+    GAMES_CACHE = [];
+  }
+  return GAMES_CACHE;
 }
-function deleteGame(id){ saveGames(getGames().filter(g => g.id !== id)); }
+
+function getGames(){ return GAMES_CACHE || []; }
 function getGame(id){ return getGames().find(g => g.id === id) || null; }
+
+// L'édition se fait désormais dans le CMS (page /admin/), plus en localStorage.
+// On neutralise donc l'ancien mode admin in-page (boutons éditer/suppr. sur le site public).
+function gIsAdmin(){ return false; }
 
 // ============================================================
 //  CAROUSEL images + vidéos (auto-suffisant, styles injectés)
@@ -69,10 +96,7 @@ function getGame(id){ return getGames().find(g => g.id === id) || null; }
   document.head.appendChild(s);
 })();
 
-// ---- Détection session admin (session partagée avec admin.html) ----
-function gIsAdmin(){ return sessionStorage.getItem('studio_admin') === 'true'; }
-
-// ---- CSS des contrôles admin (lien flottant + boutons carte + barre fiche) ----
+// ---- CSS des contrôles admin (conservé, mais inactif car gIsAdmin()=false) ----
 (function injectAdminUICSS(){
   if (document.getElementById('game-admin-css')) return;
   const css = `
@@ -102,14 +126,14 @@ function gIsAdmin(){ return sessionStorage.getItem('studio_admin') === 'true'; }
   document.head.appendChild(s);
 })();
 
-// ---- Lien flottant vers l'admin (présent sur jeux.html / jeu.html) ----
+// ---- Lien flottant vers le CMS (présent sur jeux.html / jeu.html) ----
 function injectAdminLink(){
   if (document.getElementById('gc-admin-link')) return;
   const a = document.createElement('a');
   a.id = 'gc-admin-link';
   a.className = 'gc-admin-link';
-  a.href = 'admin.html#games';
-  a.innerHTML = '<span class="dot"></span>' + (gIsAdmin() ? 'admin · connecté' : 'admin');
+  a.href = 'admin/';                 // <- pointe vers le nouveau CMS Sveltia
+  a.innerHTML = '<span class="dot"></span>admin';
   document.body.appendChild(a);
 }
 
@@ -187,7 +211,7 @@ window.gameCarouselGo = function(id, index){
 };
 
 // ============================================================
-//  RENDU PUBLIC
+//  RENDU PUBLIC  (inchangé)
 // ============================================================
 
 // ---- Grille catalogue (jeux.html → #games-grid) ----
@@ -199,20 +223,12 @@ function renderGamesGrid(){
     c.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-family:var(--mono);padding:60px 0">// aucun jeu pour le moment</p>';
     return;
   }
-  const admin = gIsAdmin();
   c.innerHTML = games.map(g => {
     const b = GAME_BADGE[g.badge] || GAME_BADGE.dev;
     const bg = g.cover
       ? `style="background-image:url('${gEsc(g.cover)}');background-size:cover;background-position:center"`
       : '';
-    const adminCtrls = admin
-      ? `<div class="card-admin">
-           <button class="edit" data-gedit="${g.id}">Éditer</button>
-           <button class="del" data-gdel="${g.id}">Suppr.</button>
-         </div>`
-      : '';
     return `<a class="card reveal in" href="jeu.html?id=${g.id}">
-      ${adminCtrls}
       <div class="art" ${bg}></div>
       <div class="body">
         <p class="gen">${gEsc((g.genre || '').toUpperCase())}</p>
@@ -222,18 +238,6 @@ function renderGamesGrid(){
       </div>
     </a>`;
   }).join('');
-
-  // Contrôles admin : empêchent la navigation de la carte
-  if (admin){
-    c.querySelectorAll('[data-gedit]').forEach(btn => btn.addEventListener('click', e => {
-      e.preventDefault(); e.stopPropagation();
-      location.href = 'admin.html#game-edit/' + btn.dataset.gedit;
-    }));
-    c.querySelectorAll('[data-gdel]').forEach(btn => btn.addEventListener('click', e => {
-      e.preventDefault(); e.stopPropagation();
-      if (confirm('Supprimer ce jeu ?')){ deleteGame(btn.dataset.gdel); renderGamesGrid(); }
-    }));
-  }
 }
 
 // ---- Mise en avant accueil (index.html → #featured-games) ----
@@ -300,15 +304,6 @@ function renderGamePage(){
   document.title = (g.name || 'Jeu') + ' — STUDIO';
   const b = GAME_BADGE[g.badge] || GAME_BADGE.dev;
 
-  // Barre admin (visible seulement si connecté)
-  const adminBar = gIsAdmin()
-    ? `<div class="game-admin-bar">
-         <span class="lbl">// mode admin</span>
-         <a class="edit" href="admin.html#game-edit/${g.id}">Éditer ce jeu</a>
-         <button class="del" id="game-del-btn">Supprimer</button>
-       </div>`
-    : '';
-
   // Hero
   const heroBg = g.cover
     ? `style="background-image:linear-gradient(105deg,rgba(10,10,12,.85) 0%,rgba(10,10,12,.5) 55%,rgba(10,10,12,.25) 100%),url('${gEsc(g.cover)}');background-size:cover;background-position:center"`
@@ -317,7 +312,7 @@ function renderGamePage(){
   if (g.steamUrl)   storeBtns += `<a class="btn-primary" href="${gEsc(g.steamUrl)}" target="_blank" rel="noopener">WISHLIST STEAM</a>`;
   if (g.trailerUrl) storeBtns += `<a class="btn-ghost" href="${gEsc(g.trailerUrl)}" target="_blank" rel="noopener">// bande-annonce</a>`;
 
-  let html = adminBar + `<section class="section" style="padding-top:96px"><div class="wrap reveal in">
+  let html = `<section class="section" style="padding-top:96px"><div class="wrap reveal in">
     <div class="game-hero">
       <div class="art-bg" ${heroBg}></div>
       <div class="inner">
@@ -363,24 +358,14 @@ function renderGamePage(){
   html += `</aside></div></section>`;
 
   c.innerHTML = html;
-
-  // Câblage suppression (mode admin)
-  const delBtn = document.getElementById('game-del-btn');
-  if (delBtn){
-    delBtn.addEventListener('click', () => {
-      if (confirm('Supprimer définitivement « ' + (g.name || 'ce jeu') + ' » ?')){
-        deleteGame(g.id);
-        location.href = 'jeux.html';
-      }
-    });
-  }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// ---- Init : on charge d'abord les données, PUIS on rend ----
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadGames();              // <- lit content/jeux.json une seule fois
   renderFeaturedGames();
   renderGamesGrid();
   renderGamePage();
-  // Lien admin flottant sur les pages catalogue / fiche
   if (document.getElementById('games-grid') || document.getElementById('game-detail')){
     injectAdminLink();
   }
