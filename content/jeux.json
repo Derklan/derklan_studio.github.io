@@ -1,1 +1,20 @@
-{ "jeux": [] }
+{
+  "jeux": [
+    {
+      "id": "",
+      "created": "",
+      "name": "test",
+      "genre": "test",
+      "badge": "dev",
+      "pitch": "na",
+      "cover": "",
+      "featured": true,
+      "steamUrl": "",
+      "trailerUrl": "",
+      "description": "",
+      "features": "",
+      "specs": [],
+      "media": []
+    }
+  ]
+}
